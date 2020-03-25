@@ -111,6 +111,7 @@ if SESSION_FILE_PATH is not None:
 # Email
 #
 
+EMAIL_USE_TLS = EMAIL.get('TLS', False)
 EMAIL_HOST = EMAIL.get('SERVER')
 EMAIL_PORT = EMAIL.get('PORT', 25)
 EMAIL_HOST_USER = EMAIL.get('USERNAME')
@@ -119,18 +120,22 @@ EMAIL_TIMEOUT = EMAIL.get('TIMEOUT', 10)
 SERVER_EMAIL = EMAIL.get('FROM_EMAIL')
 EMAIL_SUBJECT_PREFIX = '[Base] '
 
+# Print mails on console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 #
 # Django
 #
 
 INSTALLED_APPS = [
-    'pages.apps.PagesConfig',
+    'tasks.apps.TasksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 # Middleware
