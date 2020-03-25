@@ -130,7 +130,7 @@ if EMAIL_BACKENDS:
 #
 
 INSTALLED_APPS = [
-    'pages.apps.PagesConfig',
+    'postings.apps.PostingsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -198,7 +198,7 @@ STATICFILES_DIRS = (
 )
 
 # Media
-MEDIA_URL = '/{}media/'.format(BASE_PATH)
+# MEDIA_URL = '/{}media/'.format(BASE_PATH)
 
 # Messages
 MESSAGE_TAGS = {
@@ -212,26 +212,17 @@ CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 REST_FRAMEWORK_VERSION = VERSION[0:3] # User major.minior as API version
 REST_FRAMEWORK = {
-    # 'ALLOWED_VERSIONS': [REST_FRAMEWORK_VERSION],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'netbox.api.TockenAuthentication',
-    # ),
-    # 'DEFAULT_FILTER_BACKENDS': (
-    #     'django_filters.resut_framewirl.DjangofilterBackend',
-    # ),
-    # 'DEFAULT_PAGINATION_CLASS': 'netbox.api.OptionalLimitOffsetPagination',
-    # 'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        # 'netbox.api.TokenPermissions',
-    # ),
-    # 'DEFAULT_RENDERED_CLASSES': (
-        # 'rest_framework.renders.JSONRender',
-        # 'netbox.api.FormlessBrowsableAPIRenderer',
-    # ),
-    # 'DEFAULT_VERSION': REST_FRAMEWORK_VERSION,
-    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
-    # 'PAGE_SIZE': PAGINATE_COUNT,
-    # 'VIEW_NAME_FUNCTION': 'netbox.api.get_view_name'
+    'ALLOWED_VERSIONS': [REST_FRAMEWORK_VERSION],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_RENDERED_CLASSES': (
+        'rest_framework.renders.JSONRender',
+    ),
+    'DEFAULT_VERSION': REST_FRAMEWORK_VERSION,
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
 }
