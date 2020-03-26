@@ -130,7 +130,7 @@ if EMAIL_BACKENDS:
 #
 
 INSTALLED_APPS = [
-    'pages.apps.PagesConfig',
+    'courses.apps.CoursesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
