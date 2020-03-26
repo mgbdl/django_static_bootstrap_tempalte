@@ -57,7 +57,7 @@ except ImportError:
     )
 
 # Enforce required configuration parameters
-for parameter in ['ALLOWED_HOSTS', 'DATABASE', 'SECRET_KEY']:
+for parameter in ['ALLOWED_HOSTS', 'DATABASE', 'SECRET_KEY', 'REDIS']:
     if not hasattr(configuration, parameter):
         raise ImproperlyConfigured(
             "Required parameter {} is missing from configuration.py.".format(parameter)
@@ -75,12 +75,14 @@ DATABASES = {
 # Set required parameters
 ALLOWED_HOSTS = getattr(configuration, 'ALLOWED_HOSTS')
 DATABASE = getattr(configuration, 'DATABASE', DATABASES)
+REDIS = getattr(configuration, 'REDIS')
 SECRET_KEY = getattr(configuration, 'SECRET_KEY')
 
 # Set optional parameters
 BASE_PATH = getattr(configuration, 'BASE_PATH', '')
 if BASE_PATH:
     BASE_PATH = BASE_PATH.strip('/') + '/' # Enforce trailing slash only
+CELERY = getattr(configuration, 'CELERY', '')
 DEBUG = getattr(configuration, 'DEBUG', False)
 EMAIL = getattr(configuration, 'EMAIL', {})
 LOGGING = getattr(configuration, 'LOGGING', {})
@@ -96,6 +98,44 @@ TIME_ZONE = getattr(configuration, 'TIME_ZONE', 'UTC')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+
+#
+# Redis
+#
+
+# Backgroud task queuing
+if 'tasks' in REDIS:
+    TASK_REDIS = REDIS['tasks']
+elif 'webhooks' in REDIS:
+    # TODO: Remove support for 'webhooks' name in v2.9
+    warnings.warn(
+        "The 'webhooks' REDIS configuration section has been renamed to 'tasks'. Please update your configurations as "
+        "support for the old name will be removed in a future release." 
+    )
+    TASK_REDIS = REDIS['webhooks']
+else:
+    raise ImproperlyConfigured(
+        "REDIS seccion in configuration.py is missing the 'tasks' subsection."
+    )
+
+TASK_REDIS_HOST = TASK_REDIS.get('HOST', 'localhost')
+TASK_REDIS_PORT = TASK_REDIS.get('PORT', 6379)
+TASK_REDIS_SENTINELS = TASK_REDIS.get('SENTINELS', [])
+TAKS_REDIS_USING_SENTINEL = all([
+    isinstance(TASK_REDIS_SENTINELS, (list, tuple)),
+    len(TASK_REDIS_SENTINELS) > 0
+])
+TASK_REDIS_SENTINEL_SERVICE = TASK_REDIS.get('SENTINEL_SERVICE', 'default')
+TASK_REDIS_PASSWORD = TASK_REDIS.get('PASSWORD', '')
+TASK_REDIS_DATABASAE = TASK_REDIS.get('DATABASE', 0)
+TASK_REDIS_DEFAULT_TIMEOUT = TASK_REDIS.get('DEFAULT_TIMEOUT', 300)
+TASK_REDIS_SSL = TASK_REDIS.get('SSL', False)
+
+
+
+
+
+
 
 #
 # Session
@@ -122,6 +162,19 @@ EMAIL_SUBJECT_PREFIX = '[Base] '
 
 # Print mails on console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#
+# Celery
+#
+
+
+# BROKER_URL = CELERY.get('BROKER_URL') # amqp RabbitMQ
+CELERY_BROKER_URL = CELERY.get('BROKER_URL')
+CELERY_RESULT_BACKEND = CELERY.get('RESULT_BACKEND')
+CELERY_ACCEPT_CONTENT = CELERY.get('ACCEPT_CONTENT')
+CELERY_TASK_SERIALIZER = CELERY.get('TASK_SERIALIZER')
+CELERY_RESULT_SERIALIZER = CELERY.get('RESULT_SERIALIZER')
+CELERY_TIMEZONE = CELERY.get('TIMEZONE')
 
 #
 # Django

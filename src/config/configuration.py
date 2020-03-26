@@ -20,6 +20,48 @@ DATABASE = {
     # 'CONN_MAX_AGE': 300,
 }
 
+# Redis database settings. Redis is used for caching and for quering background tasks such as webhooks events. A separate 
+# configuration exists for each. Full connection details are required in both sections, and it is strongly recommended
+# to use two separe database IDs.
+
+REDIS = {
+    'tasks': {
+        'HOST': 'localhost',
+        'PORT': '6379',
+        # Comment out 'HOST' and 'PORT' lines and uncomment the following if using Redis Sentinel
+        # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
+        # 'SENTINEL_SERVICES': 'base',
+        'PASSWORD': '', 
+        'DATABASE': 0,
+        'DEFAULT_TIMEOUT': 300,
+        'SSL': False,
+    },
+    'caching': {
+        'HOST': 'localhost',
+        'PORT': '6379',
+        # Comment out 'HOST' and 'PORT' lines and uncomment the following if using Redis Sentinel
+        # 'SENTINELS': [('mysentinel.redis.example.com', 6379)],
+        # 'SENTINEL_SERVICES': 'base',
+        'PASSWORD': '', 
+        'DATABASE': 0,
+        'DEFAULT_TIMEOUT': 300,
+        'SSL': False,
+    }
+}
+
+# Celery settings. Celery is a powerful asynchronous job queue used for running tasks in the background.
+
+CELERY = {
+    'BROKER_URL': 'redis://localhost:6379',
+    'RESULT_BACKEND': 'redis://localhost:6379',
+    'ACCEPT_CONTENT': [
+        'application/json',
+    ],
+    'TASK_SERIALIZER': 'json',
+    'RESULT_SERIALIZER': 'json',
+    'TIME_ZONE': 'Africa/Nairobi',
+}
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'dwpm9+k%$k(8686*6%-j9y_bhvsx7k7uexgsh-hk5&4w+%m8j3'
 
