@@ -131,10 +131,25 @@ TASK_REDIS_DATABASAE = TASK_REDIS.get('DATABASE', 0)
 TASK_REDIS_DEFAULT_TIMEOUT = TASK_REDIS.get('DEFAULT_TIMEOUT', 300)
 TASK_REDIS_SSL = TASK_REDIS.get('SSL', False)
 
-
-
-
-
+# Catching
+if 'caching' in REDIS:
+    CACHING_REDIS = REDIS['caching']
+else:
+    raise ImproperlyConfigured(
+        "REDIS section in configuration.py is missing caching subsection."
+    )
+CACHING_REDIS_HOST = CACHING_REDIS.get('HOST', 'localhost')
+CACHONG_REDIS_PORT = CACHING_REDIS.get('PORT', 6379)
+CACHING_REDIS_SENTINELS = CACHING_REDIS.get('SENTINELS', [])
+CACHING_REDIS_USING_SENTINELS = all([
+    isinstance(CACHING_REDIS_SENTINELS, (list, tuple)), 
+    len(CACHING_REDIS_SENTINELS) > 0
+])
+CACHING_REDIS_SENTINEL_SERVICE = CACHING_REDIS.get('SENTINEL_SERVICE', 'default')
+CACHING_REDIS_PASSWORD = CACHING_REDIS.get('PASSWORD', '')
+CACHING_REDIS_DATABASE = CACHING_REDIS.get('DATABASE', 0)
+CACHING_REDIS_DEFAULT_TIMEOUT = CACHING_REDIS.get('DEFAULT_TIMEOUT', 300)
+CACHING_REDIS_SSL = CACHING_REDIS.get('SSL', False)
 
 
 #
@@ -151,6 +166,12 @@ if SESSION_FILE_PATH is not None:
 # Email
 #
 
+# local configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # Print mails on console
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+DEFAULT_FROM_EMAIL = 'Code Dream Inc <code.dreaminc@gmail.com>'
+
 EMAIL_USE_TLS = EMAIL.get('TLS', False)
 EMAIL_HOST = EMAIL.get('SERVER')
 EMAIL_PORT = EMAIL.get('PORT', 25)
@@ -160,8 +181,6 @@ EMAIL_TIMEOUT = EMAIL.get('TIMEOUT', 10)
 SERVER_EMAIL = EMAIL.get('FROM_EMAIL')
 EMAIL_SUBJECT_PREFIX = '[Base] '
 
-# Print mails on console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #
 # Celery
@@ -181,7 +200,7 @@ CELERY_TIMEZONE = CELERY.get('TIMEZONE')
 #
 
 INSTALLED_APPS = [
-    'tasks.apps.TasksConfig',
+    'feedback.apps.FeedbackConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

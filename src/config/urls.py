@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from feedback.views import FeedbackView
+
 urlpatterns = [
-    # path('', include('tasks.urls')),
+    # path('feedback/', include('feedback.urls')),
+    path('', FeedbackView.as_view(), name="feedback"),
     path('admin/', admin.site.urls),
 ]
 

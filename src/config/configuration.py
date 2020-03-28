@@ -80,13 +80,13 @@ DEBUG = True
 
 # SMPT
 EMAIL = {
-    'TLS': True, 
-    'SERVER': 'smtp.gmail.com',
-    'PORT': 587,
-    'USERNAME': 'mikebl2910@gmail.com',
-    'PASSWORD': '',
-    'TIMEOUT': 10, 
-    'FROM_EMAIL': '',
+    # 'TLS': True, 
+    # 'SERVER': 'smtp.gmail.com',
+    # 'PORT': 587,
+    # 'USERNAME': 'code.dreaminc@gmail.com',
+    # 'PASSWORD': '',
+    # 'TIMEOUT': 10, 
+    # 'FROM_EMAIL': '',
 }
 
 # Enable custom logging.
