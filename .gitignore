@@ -170,6 +170,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Celery
+*.pid
+
 # End of https://www.gitignore.io/api/django
 
 # Work Directory

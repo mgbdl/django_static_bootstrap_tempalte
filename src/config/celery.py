@@ -8,7 +8,8 @@ app = Celery('config')
 # app = Celery('broker=CELERY_BROKER_URL')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS, force=True)
+# app.autodiscover_tasks(force=True)
 
 @app.task(bind=True)
 def debug(self):

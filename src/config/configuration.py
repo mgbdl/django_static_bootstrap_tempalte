@@ -59,7 +59,7 @@ CELERY = {
     ],
     'TASK_SERIALIZER': 'json',
     'RESULT_SERIALIZER': 'json',
-    'TIME_ZONE': 'Africa/Nairobi',
+    'TIME_ZONE': 'America/Mexico_City',
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -132,7 +132,8 @@ PAGINATE_COUNT = 50
 SESSION_FILE_PATH = None
 
 # Time zone (default: UTC)
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 # Date/time formatting. See the followint link for supported formats:
 # http://docs.djangoproject.com/en/stable/ref/templated/builtins/#date

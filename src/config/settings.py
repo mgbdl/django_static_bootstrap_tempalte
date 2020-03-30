@@ -194,13 +194,22 @@ CELERY_ACCEPT_CONTENT = CELERY.get('ACCEPT_CONTENT')
 CELERY_TASK_SERIALIZER = CELERY.get('TASK_SERIALIZER')
 CELERY_RESULT_SERIALIZER = CELERY.get('RESULT_SERIALIZER')
 CELERY_TIMEZONE = CELERY.get('TIMEZONE')
+CELERY_IMPORTS = ('feedback.tasks', 'photos.tasks',)
+
+# from celery.schedules import crontab
+# CELERY_BEAT_SCHEDULE = {
+#     'test-celery': {
+#         'task': 'photos.tasks.save_latest_flickr_image_task',
+#         'schedule': crontab(minute='*'),
+#     }
+# }
+
 
 #
 # Django
 #
 
 INSTALLED_APPS = [
-    'feedback.apps.FeedbackConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -208,6 +217,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_celery_beat',
+
+    'photos.apps.PhotosConfig',
+    'feedback.apps.FeedbackConfig',
+
 ]
 
 # Middleware

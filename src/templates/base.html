@@ -21,7 +21,7 @@
         <div class="section">
             <div class="row">
                 <div class="col s9">
-                    <a href="{% url 'feedback' %}"><h3>Picha!</h3></a>
+                    <a href="{% url 'feedback:feedback-view' %}"><h3>Picha!</h3></a>
                 </div>
                 <div class="col s3">
                     <button data-target='feedback-modal' class='waves-effect waves-light btn modal-trigger'>Got Feedback?</button>
@@ -32,7 +32,9 @@
             <div id="feedback-modal" class="modal">
                 <div class="modal-content">
                     <h4>We <3 feedback </h4>
-                    <form action="{% url 'feedback' %}" method="post">
+                    <form action="{% url 'feedback:feedback-view' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p}}
                         <button class="btn waves-effect waves-light" type="submit" name="actopm">Submit
                             <i class="mdi-content-send right"></i>
                         </button>

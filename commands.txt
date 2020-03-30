@@ -4,4 +4,13 @@ python manage.py createsuperuser
 python manage.py runserver
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@myproject.com', 'admin')" | python manage.py shell
 pip install 'celery[redis]'
+
+Mac home brew Redis
 brew services start redis
+
+Mac home brew Rabbitmq
+rabbitmq-server
+
+Celery
+celery -A config worker -l info
+celery -A config beat -l info
