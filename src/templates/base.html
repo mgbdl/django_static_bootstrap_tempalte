@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <meta charset="UTF-8"> -->
-    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css"  media="screen,projection"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Let browser website is optimized for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-    <!-- Font Awesom -->
-    <!-- <link rel="stylesheet" href="{% static 'css/all.css' %}"> -->
-    <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> -->
+    <!-- Google Incon Font -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- Materialize -->
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}"/>
     <!-- Custom -->
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %} Picha! {% endblock %}</title>
     {% block headcss %}{% endblock %}
 </head>
@@ -36,7 +35,7 @@
                         {% csrf_token %}
                         {{ form.as_p}}
                         <button class="btn waves-effect waves-light" type="submit" name="actopm">Submit
-                            <i class="mdi-content-send right"></i>
+                            <i class="material-icons right">send</i>
                         </button>
                     </form>
                 </div>
@@ -48,11 +47,9 @@
         </div>
     </div>
     <!-- Import JQuery before materialize.js -->
-    <!-- <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script> -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js'%}" ></script>
+    <script src="{% static 'js/main.js' %}"></script>
     {% block extrabody %}{% endblock %}
 </body>
 </html>

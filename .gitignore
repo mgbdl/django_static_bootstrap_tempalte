@@ -151,7 +151,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -172,6 +171,7 @@ dmypy.json
 
 # Celery
 *.pid
+
 
 # End of https://www.gitignore.io/api/django
 
