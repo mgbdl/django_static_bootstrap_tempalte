@@ -37,11 +37,13 @@ SECRET_KEY = 'dwpm9+k%$k(8686*6%-j9y_bhvsx7k7uexgsh-hk5&4w+%m8j3'
 DEBUG = True
 
 EMAIL = {
+    # 'TLS': False,
     # 'SERVER': '',
     # 'PORT': 25,
     # 'USERNAME': '',
     # 'TIMEOUT': 10, 
     # 'FROM_EMAIL': '',
+    # 'BACKENDS' : False,
 }
 
 # Enable custom logging.

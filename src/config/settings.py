@@ -111,6 +111,8 @@ if SESSION_FILE_PATH is not None:
 # Email
 #
 
+# For gmail
+EMAIL_USER_TLS = EMAIL.get('TLS', False)
 EMAIL_HOST = EMAIL.get('SERVER')
 EMAIL_PORT = EMAIL.get('PORT', 25)
 EMAIL_HOST_USER = EMAIL.get('USERNAME')
@@ -118,6 +120,10 @@ EMAIL_HOST_PASSWORD = EMAIL.get('PASSWORD')
 EMAIL_TIMEOUT = EMAIL.get('TIMEOUT', 10)
 SERVER_EMAIL = EMAIL.get('FROM_EMAIL')
 EMAIL_SUBJECT_PREFIX = '[Base] '
+EMAIL_BACKENDS = EMAIL.get('BACKENDS', False)
+
+if EMAIL_BACKENDS:
+    EMAIL_BACKENDS = 'django.core.mail.backends.console.EmailBackend'
 
 #
 # Django
@@ -132,6 +138,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_extensions',
 ]
 
 # Middleware
@@ -209,6 +216,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         # 'netbox.api.TockenAuthentication',
     ),
     # 'DEFAULT_FILTER_BACKENDS': (

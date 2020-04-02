@@ -47,7 +47,7 @@ class BlogPostAPITestCase(APITestCase):
     def test_post_item(self):
         # test the get list
         data = {"title": "Some random title", "content": "some more content"}  
-        url = api_reverse("api-posting:post-listcreate")
+        url = api_reverse("api-postings:post-listcreate")
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
