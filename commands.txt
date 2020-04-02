@@ -14,3 +14,27 @@ rabbitmq-server
 Celery
 celery -A config worker -l info
 celery -A config beat -l info
+
+brew install supervisor
+brew services start supervisor
+
+Troubleshoot
+https://stackoverflow.com/questions/52023916/supervisord-http-localhost9001-refused-connection
+
+brew services restart supervisor
+
+Config files goes here
+/usr/local/etc/supervisor.d/long_script.conf
+
+Init Supervisor conf
+sudo supervisord -c /usr/local/etc/supervisord.ini
+
+Control Supervisor conf
+sudo supervisorctl -c /usr/local/etc/supervisord.ini
+
+
+tail -f -n200 /var/logs/celery/base_worker.out.log
+tail -f -n200 /var/logs/celery/base_worker.err.log
+
+tail -f -n200 /var/logs/celery/base_beat.out.log
+tail -f -n200 /var/logs/celery/base_beat.err.log
