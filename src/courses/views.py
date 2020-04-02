@@ -3,6 +3,10 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 
 from .models import Course, Review
 from .serializers import CourseSerializer, ReviewSerializer
@@ -45,3 +49,22 @@ class RetrieveUpdateDestroyReview(generics.RetrieveUpdateDestroyAPIView):
             course_id=self.kwargs.get('course_pk'), 
             pk=self.kwargs.get('pk')
         )
+
+# Only generates CRUD for a single model
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+    # List Review only
+    @action(detail=True, methods=['get'])
+    def reviews(self, request, pk=None):
+        course = self.get_object()
+        serializer = ReviewSerializer(
+            course.reviews.all(), many=True)
+        return Response(serializer.data)
+        
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
