@@ -130,6 +130,7 @@ if EMAIL_BACKENDS:
 #
 
 INSTALLED_APPS = [
+    'courses.apps.CoursesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -214,6 +215,7 @@ REST_FRAMEWORK = {
     'ALLOWED_VERSIONS': [REST_FRAMEWORK_VERSION],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # How to identify the user
         'rest_framework.authentication.SessionAuthentication',
         # 'netbox.api.TockenAuthentication',
     ),
@@ -222,6 +224,7 @@ REST_FRAMEWORK = {
     # ),
     # 'DEFAULT_PAGINATION_CLASS': 'netbox.api.OptionalLimitOffsetPagination',
     'DEFAULT_PERMISSION_CLASSES': (
+        # Operations over the endpoints
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         # 'netbox.api.TokenPermissions',
     ),
