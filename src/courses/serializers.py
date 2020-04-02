@@ -19,6 +19,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = (
             'id', 
             'course',
+            'name',
             'email',
             'comment',
             'rating',
