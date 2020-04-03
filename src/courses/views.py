@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 from rest_framework import generics
+from rest_framework import mixins
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -57,14 +58,18 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     # List Review only
     @action(detail=True, methods=['get'])
-    def reviews(self, request, pk=None):
+    def reviews(self, request, pk=None): 
         course = self.get_object()
         serializer = ReviewSerializer(
             course.reviews.all(), many=True)
         return Response(serializer.data)
-        
 
-class ReviewViewSet(viewsets.ModelViewSet):
+class ReviewViewSet(mixins.CreateModelMixin, 
+                    mixins.RetrieveModelMixin, 
+                    mixins.DestroyModelMixin, 
+                    mixins.UpdateModelMixin,
+                    # mixins.ListModelMixing,
+                    viewsets.GenericViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
