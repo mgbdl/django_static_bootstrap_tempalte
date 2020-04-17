@@ -9,14 +9,16 @@
     <!-- Google Incon Font -->
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <!-- Materialize -->
-    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>
     <!-- Custom -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %} Picha! {% endblock %}</title>
     {% block headcss %}{% endblock %}
 </head>
 <body>
-    <div class="container">
+    <h1>Hola</h1>
+    <i class="fas fa-address-card"></i>
+    <!-- <div class="container">
         <div class="section">
             <div class="row">
                 <div class="col s9">
@@ -44,11 +46,11 @@
                 </div>
             </div>
             {% block content %} {% endblock %}
-        </div>
+        </div> -->
     </div>
     <!-- Import JQuery before materialize.js -->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/materialize.min.js'%}" ></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}" ></script>
     <script src="{% static 'js/main.js' %}"></script>
     {% block extrabody %}{% endblock %}
 </body>
