@@ -137,6 +137,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_extensions',
 ]
 
@@ -214,8 +215,9 @@ REST_FRAMEWORK = {
     'ALLOWED_VERSIONS': [REST_FRAMEWORK_VERSION],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        # 'netbox.api.TockenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        
     ),
     # 'DEFAULT_FILTER_BACKENDS': (
     #     'django_filters.resut_framewirl.DjangofilterBackend',
